@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemoryDesk</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <header class="header">
+            <div>
+                <h1>🧠 MemoryDesk</h1>
+                <p>AI Customer Support That Remembers</p>
+            </div>
+            <div class="status">
+                <span></span> Memory Active
+            </div>
+        </header>
+
+        <main class="main">
+
+            <section class="chat-section">
+
+                <div class="customer">
+                    <div class="avatar">A</div>
+                    <div>
+                        <strong>Alex</strong>
+                        <small>Customer</small>
+                    </div>
+                </div>
+
+                <div id="chatBox" class="chat-box">
+                    <div class="welcome">
+                        <div class="welcome-icon">🧠</div>
+                        <h2>Hi Alex!</h2>
+                        <p>
+                            I'm MemoryDesk. I remember relevant details
+                            from your previous conversations.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="input-area">
+                    <input
+                        type="text"
+                        id="messageInput"
+                        placeholder="Type your message..."
+                        autocomplete="off"
+                    >
+                    <button id="sendButton">Send ➤</button>
+                </div>
+
+            </section>
+
+
+            <aside class="memory-section">
+
+                <div class="memory-header">
+                    <h2>🧠 Memory</h2>
+                    <span id="memoryCount">0</span>
+                </div>
+
+                <p class="memory-description">
+                    Relevant memories used by the AI
+                </p>
+
+                <div id="memoryList" class="memory-list">
+                    <div class="empty-memory">
+                        No memories used yet.
+                    </div>
+                </div>
+
+            </aside>
+
+        </main>
+
+    </div>
+
+    <script src="/static/script.js"></script>
+
+</body>
+</html>

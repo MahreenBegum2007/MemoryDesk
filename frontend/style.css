@@ -1,0 +1,1087 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #172033;
+}
+
+.app {
+    min-height: 100vh;
+}
+
+/* HEADER */
+
+.header {
+    height: 80px;
+    background: white;
+    border-bottom: 1px solid #e5e9f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 45px;
+}
+
+.header h1 {
+    font-size: 25px;
+    margin-bottom: 4px;
+}
+
+.header p {
+    color: #718096;
+    font-size: 14px;
+}
+
+.status {
+    background: #ecfdf5;
+    color: #15803d;
+    padding: 9px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    margin-right: 7px;
+}
+
+/* MAIN */
+
+.main {
+    max-width: 1200px;
+    margin: 35px auto;
+    padding: 0 25px;
+    display: grid;
+    grid-template-columns: 1fr 330px;
+    gap: 25px;
+}
+
+/* CHAT */
+
+.chat-section,
+.memory-section {
+    background: white;
+    border: 1px solid #e5e9f0;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+}
+
+.chat-section {
+    min-height: 650px;
+    display: flex;
+    flex-direction: column;
+}
+
+.customer {
+    padding: 20px 25px;
+    border-bottom: 1px solid #edf0f5;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #6366f1;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.customer strong {
+    display: block;
+}
+
+.customer small {
+    color: #8a94a6;
+}
+
+/* CHAT BOX */
+
+.chat-box {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+}
+
+.welcome {
+    text-align: center;
+    margin-top: 150px;
+    color: #667085;
+}
+
+.welcome-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.welcome h2 {
+    color: #172033;
+    margin-bottom: 10px;
+}
+
+.welcome p {
+    max-width: 400px;
+    margin: auto;
+    line-height: 1.6;
+}
+
+/* MESSAGES */
+
+.message {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.message.user {
+    justify-content: flex-end;
+}
+
+.message-content {
+    max-width: 70%;
+    padding: 13px 17px;
+    border-radius: 15px;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.message.user .message-content {
+    background: #6366f1;
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.message.ai .message-content {
+    background: #f1f5f9;
+    color: #172033;
+    border-bottom-left-radius: 4px;
+}
+
+/* INPUT */
+
+.input-area {
+    border-top: 1px solid #edf0f5;
+    padding: 18px;
+    display: flex;
+    gap: 10px;
+}
+
+.input-area input {
+    flex: 1;
+    border: 1px solid #d9dee8;
+    border-radius: 10px;
+    padding: 13px 15px;
+    font-size: 14px;
+    outline: none;
+}
+
+.input-area input:focus {
+    border-color: #6366f1;
+}
+
+.input-area button {
+    border: none;
+    background: #6366f1;
+    color: white;
+    padding: 0 22px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.input-area button:hover {
+    background: #4f46e5;
+}
+
+/* MEMORY PANEL */
+
+.memory-section {
+    padding: 22px;
+    height: fit-content;
+}
+
+.memory-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.memory-header h2 {
+    font-size: 19px;
+}
+
+.memory-header span {
+    background: #eef2ff;
+    color: #4f46e5;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.memory-description {
+    color: #8a94a6;
+    font-size: 13px;
+    margin-top: 7px;
+    margin-bottom: 20px;
+}
+
+.memory-card {
+    background: #f8fafc;
+    border: 1px solid #e7ebf2;
+    padding: 13px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.empty-memory {
+    text-align: center;
+    color: #a0a8b5;
+    font-size: 13px;
+    padding: 30px 10px;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+    .main {
+        grid-template-columns: 1fr;
+    }
+
+    .memory-section {
+        order: 2;
+    }
+
+    .header {
+        padding: 0 20px;
+    }
+
+    .status {
+        display: none;
+    }
+}
+
+/* ================================
+   Enhanced Memory Panel
+================================ */
+
+.memory-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    margin-bottom: 12px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+}
+
+.memory-dot {
+    width: 9px;
+    height: 9px;
+    background: #22c55e;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.memory-status strong {
+    display: block;
+    font-size: 13px;
+    color: #166534;
+}
+
+.memory-status small {
+    display: block;
+    margin-top: 2px;
+    font-size: 11px;
+    color: #4b7c5a;
+}
+
+.memory-card {
+    padding: 13px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 11px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.memory-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.memory-number {
+    font-size: 10px;
+    font-weight: 700;
+    color: #7c3aed;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.memory-check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #16a34a;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.memory-text {
+    font-size: 12px;
+    line-height: 1.55;
+    color: #374151;
+}
+
+.learning-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 14px;
+    padding: 13px;
+    background: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 11px;
+}
+
+.learning-icon {
+    font-size: 18px;
+}
+
+.learning-box strong {
+    display: block;
+    font-size: 12px;
+    color: #6b21a8;
+}
+
+.learning-box small {
+    display: block;
+    margin-top: 3px;
+    font-size: 10px;
+    line-height: 1.4;
+    color: #7e5a91;
+}
+
+.empty-icon {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.empty-memory p {
+    margin: 0;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.empty-memory small {
+    display: block;
+    margin-top: 5px;
+    color: #9ca3af;
+    line-height: 1.4;
+}
+
+/* =====================================================
+   MEMORYDESK - FINAL UI POLISH
+   Safe frontend-only styling
+===================================================== */
+
+/* ---------- Overall page ---------- */
+
+body {
+    background: #f4f7fb;
+}
+
+.app {
+    max-width: 1250px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+
+/* ---------- Header ---------- */
+
+.header {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    margin: 20px;
+    padding: 20px 24px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+.header h1 {
+    margin-bottom: 4px;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.header p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.status {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+    border-radius: 999px;
+    padding: 8px 13px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status span {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+}
+
+
+/* ---------- Main layout ---------- */
+
+.main {
+    gap: 20px;
+    padding: 0 20px 25px;
+}
+
+
+/* ---------- Chat section ---------- */
+
+.chat-section {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
+    overflow: hidden;
+}
+
+
+/* ---------- Customer bar ---------- */
+
+.customer {
+    padding: 18px 20px;
+    border-bottom: 1px solid #eef0f3;
+    background: #ffffff;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    box-shadow: 0 5px 12px rgba(124, 58, 237, 0.2);
+}
+
+.customer strong {
+    font-size: 14px;
+}
+
+.customer small {
+    color: #9ca3af;
+}
+
+
+/* ---------- Chat area ---------- */
+
+.chat-box {
+    background: #f8fafc;
+}
+
+.welcome {
+    padding: 45px 25px;
+}
+
+.welcome-icon {
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ede9fe;
+    border-radius: 17px;
+    font-size: 27px;
+}
+
+.welcome h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.welcome p {
+    max-width: 430px;
+    margin: auto;
+    line-height: 1.6;
+    color: #6b7280;
+}
+
+
+/* ---------- Messages ---------- */
+
+.message {
+    margin-bottom: 13px;
+}
+
+.message-content {
+    max-width: 75%;
+    padding: 12px 15px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.message.user .message-content {
+    background: #7c3aed;
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.message.ai .message-content {
+    background: white;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 3px 8px rgba(15, 23, 42, 0.04);
+}
+
+
+/* ---------- Input ---------- */
+
+.input-area {
+    background: #ffffff;
+    border-top: 1px solid #eef0f3;
+    padding: 15px;
+}
+
+.input-area input {
+    border: 1px solid #d1d5db;
+    border-radius: 11px;
+    padding: 12px 14px;
+    font-size: 13px;
+    transition: 0.2s ease;
+}
+
+.input-area input:focus {
+    outline: none;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.10);
+}
+
+.input-area button {
+    border: none;
+    border-radius: 11px;
+    background: #7c3aed;
+    color: white;
+    font-weight: 700;
+    padding: 0 20px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.input-area button:hover {
+    background: #6d28d9;
+    transform: translateY(-1px);
+}
+
+.input-area button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* ---------- Memory section ---------- */
+
+.memory-section {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
+}
+
+.memory-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.memory-header h2 {
+    font-size: 17px;
+}
+
+#memoryCount {
+    min-width: 28px;
+    height: 28px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ede9fe;
+    color: #6d28d9;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.memory-description {
+    font-size: 11px;
+    color: #9ca3af;
+    margin-top: 5px;
+    margin-bottom: 16px;
+}
+
+
+/* ---------- Memory cards ---------- */
+
+.memory-card {
+    transition: 0.2s ease;
+}
+
+.memory-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(15, 23, 42, 0.07);
+}
+
+.memory-number {
+    color: #7c3aed;
+}
+
+.memory-text {
+    color: #374151;
+}
+
+
+/* ---------- Memory status ---------- */
+
+.memory-status {
+    box-shadow: 0 3px 8px rgba(34, 197, 94, 0.06);
+}
+
+
+/* ---------- Learning indicator ---------- */
+
+.learning-box {
+    position: relative;
+    overflow: hidden;
+}
+
+.learning-box::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: #a855f7;
+}
+
+
+/* ---------- Scrollbar ---------- */
+
+.chat-box::-webkit-scrollbar,
+.memory-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-box::-webkit-scrollbar-thumb,
+.memory-list::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 10px;
+}
+
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 850px) {
+
+    .header {
+        margin: 10px;
+        padding: 16px;
+    }
+
+    .main {
+        padding: 0 10px 20px;
+    }
+
+    .message-content {
+        max-width: 88%;
+    }
+
+    .memory-section {
+        margin-top: 0;
+    }
+}
+
+/* =========================================
+   MEMORYDESK — VIBRANT AI SAAS UI
+========================================= */
+
+body {
+    background:
+        radial-gradient(circle at 10% 10%, rgba(124, 58, 237, 0.18), transparent 28%),
+        radial-gradient(circle at 90% 15%, rgba(6, 182, 212, 0.18), transparent 25%),
+        radial-gradient(circle at 80% 90%, rgba(236, 72, 153, 0.14), transparent 28%),
+        #f7f7ff;
+    color: #18152b;
+}
+
+/* APP */
+.app {
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 0 24px;
+}
+
+/* HEADER */
+.header {
+    background: linear-gradient(
+        135deg,
+        #4f46e5 0%,
+        #7c3aed 45%,
+        #ec4899 100%
+    );
+    color: white;
+    padding: 24px 30px;
+    border-radius: 24px;
+    box-shadow:
+        0 15px 45px rgba(99, 52, 196, 0.25),
+        inset 0 1px rgba(255,255,255,0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.header::after {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    right: -80px;
+    top: -100px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 50%;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.header p {
+    margin: 5px 0 0;
+    color: rgba(255,255,255,0.85);
+    font-size: 14px;
+}
+
+.status {
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+    padding: 9px 15px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+}
+
+.status span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #86efac;
+    border-radius: 50%;
+    margin-right: 7px;
+    box-shadow: 0 0 12px #86efac;
+}
+
+/* MAIN */
+.main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 370px;
+    gap: 22px;
+    margin-top: 22px;
+}
+
+/* CHAT */
+.chat-section {
+    background: rgba(255,255,255,0.88);
+    border: 1px solid rgba(124,58,237,0.12);
+    border-radius: 24px;
+    padding: 20px;
+    box-shadow: 0 15px 45px rgba(45, 35, 90, 0.10);
+    backdrop-filter: blur(12px);
+}
+
+/* CUSTOMER */
+.customer {
+    background: linear-gradient(135deg, #f5f3ff, #eef2ff);
+    border-radius: 16px;
+    padding: 13px 16px;
+    border: 1px solid #ddd6fe;
+}
+
+.avatar {
+    background: linear-gradient(135deg, #06b6d4, #3b82f6);
+    box-shadow: 0 6px 18px rgba(59,130,246,0.3);
+}
+
+/* CHAT BOX */
+.chat-box {
+    background:
+        radial-gradient(circle at 90% 10%, rgba(124,58,237,0.06), transparent 25%),
+        #fafaff;
+    border-radius: 18px;
+    border: 1px solid #e9e5ff;
+    margin-top: 15px;
+    min-height: 470px;
+}
+
+/* WELCOME */
+.welcome {
+    background: linear-gradient(
+        135deg,
+        rgba(124,58,237,0.08),
+        rgba(6,182,212,0.07)
+    );
+    border: 1px dashed #c4b5fd;
+    border-radius: 20px;
+    padding: 35px;
+}
+
+.welcome-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #7c3aed, #ec4899);
+    box-shadow: 0 12px 30px rgba(124,58,237,0.3);
+    font-size: 30px;
+}
+
+/* MESSAGES */
+.message-content {
+    border-radius: 18px;
+    padding: 13px 17px;
+    line-height: 1.5;
+}
+
+.message.user .message-content {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    box-shadow: 0 7px 20px rgba(79,70,229,0.22);
+}
+
+.message.ai .message-content {
+    background: white;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 5px 18px rgba(30,20,70,0.07);
+}
+
+/* INPUT */
+.input-area {
+    margin-top: 15px;
+    padding: 7px;
+    background: white;
+    border: 2px solid #e9e5ff;
+    border-radius: 17px;
+    box-shadow: 0 8px 25px rgba(50,30,100,0.08);
+}
+
+.input-area:focus-within {
+    border-color: #7c3aed;
+    box-shadow:
+        0 0 0 4px rgba(124,58,237,0.10),
+        0 8px 25px rgba(50,30,100,0.08);
+}
+
+.input-area input {
+    font-size: 14px;
+}
+
+.input-area button {
+    background: linear-gradient(135deg, #7c3aed, #ec4899);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-weight: 700;
+    box-shadow: 0 6px 18px rgba(124,58,237,0.25);
+    transition: 0.2s ease;
+}
+
+.input-area button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(124,58,237,0.35);
+}
+
+/* MEMORY PANEL */
+.memory-section {
+    background: linear-gradient(
+        160deg,
+        #ffffff,
+        #faf7ff
+    );
+    border: 1px solid #e9d5ff;
+    border-radius: 24px;
+    padding: 20px;
+    box-shadow: 0 15px 45px rgba(60,35,120,0.11);
+}
+
+/* MEMORY HEADER */
+.memory-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.memory-header h2 {
+    color: #4c1d95;
+    font-size: 20px;
+}
+
+#memoryCount {
+    min-width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7c3aed, #ec4899);
+    color: white;
+    font-weight: 800;
+    box-shadow: 0 5px 15px rgba(124,58,237,0.25);
+}
+
+/* MEMORY STATUS */
+.memory-status {
+    background: linear-gradient(135deg, #ecfdf5, #eff6ff) !important;
+    border: 1px solid #a7f3d0 !important;
+    box-shadow: 0 5px 15px rgba(16,185,129,0.08);
+}
+
+.memory-dot {
+    background: #10b981 !important;
+    box-shadow: 0 0 10px rgba(16,185,129,0.6);
+}
+
+/* MEMORY CARDS */
+.memory-card {
+    background: white;
+    border: 1px solid #e9d5ff !important;
+    border-left: 4px solid #8b5cf6 !important;
+    border-radius: 14px !important;
+    transition: 0.2s ease;
+}
+
+.memory-card:hover {
+    transform: translateX(3px);
+    border-left-color: #ec4899 !important;
+    box-shadow: 0 8px 22px rgba(124,58,237,0.12);
+}
+
+.memory-number {
+    color: #7c3aed !important;
+}
+
+.memory-check {
+    background: #dcfce7 !important;
+    color: #16a34a !important;
+}
+
+/* LEARNING */
+.learning-box {
+    background: linear-gradient(
+        135deg,
+        #faf5ff,
+        #fdf2f8
+    ) !important;
+    border: 1px solid #e9d5ff !important;
+    box-shadow: 0 7px 20px rgba(168,85,247,0.08);
+}
+
+.learning-icon {
+    background: linear-gradient(135deg, #7c3aed, #ec4899);
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* MEMORY DESCRIPTION */
+.memory-description {
+    color: #7c6f91 !important;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f3f0ff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(#7c3aed, #ec4899);
+    border-radius: 10px;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+    .main {
+        grid-template-columns: 1fr;
+    }
+
+    .memory-section {
+        order: 2;
+    }
+
+    .app {
+        margin: 15px auto;
+        padding: 0 12px;
+    }
+
+    .header {
+        border-radius: 18px;
+    }
+}
