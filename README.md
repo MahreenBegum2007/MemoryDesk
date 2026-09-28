@@ -142,9 +142,9 @@ After: The agent recalls relevant customer context.
 Create `.env` in the project root:
 
 ``` env
-HINDSIGHT_API_KEY=your_hindsight_api_key
+HINDSIGHT_API_KEY=...
 HINDSIGHT_URL=https://api.hindsight.vectorize.io
-GROQ_API_KEY=your_groq_api_key
+GROQ_API_KEY=...
 ```
 
 Never commit `.env` to GitHub.
