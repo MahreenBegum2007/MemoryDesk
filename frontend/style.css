@@ -1085,3 +1085,736 @@ body {
         border-radius: 18px;
     }
 }
+
+/* =====================================================
+   MEMORYDESK - NEW MEMORY FEATURES
+===================================================== */
+
+
+/* =====================================================
+   MEMORY STATE
+   Learned / Recalled indicator
+===================================================== */
+
+.memory-state {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    margin: 14px 0;
+
+    padding: 13px;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #f5f3ff,
+        #faf5ff
+    );
+
+    border: 1px solid #ddd6fe;
+
+    transition: all 0.3s ease;
+}
+
+
+.memory-state .state-icon {
+    font-size: 19px;
+    line-height: 1;
+}
+
+
+.memory-state strong {
+    display: block;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+
+    color: #6d28d9;
+}
+
+
+.memory-state small {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+
+    color: #6b7280;
+}
+
+
+/* Recalled */
+
+.memory-state.recalled {
+
+    background: linear-gradient(
+        135deg,
+        #eef2ff,
+        #f5f3ff
+    );
+
+    border-color: #c4b5fd;
+
+    box-shadow:
+        0 5px 18px rgba(124, 58, 237, 0.10);
+}
+
+
+.memory-state.recalled strong {
+    color: #5b21b6;
+}
+
+
+/* New memory */
+
+.memory-state.learned {
+
+    background: linear-gradient(
+        135deg,
+        #ecfdf5,
+        #f0fdf4
+    );
+
+    border-color: #bbf7d0;
+}
+
+
+.memory-state.learned strong {
+    color: #15803d;
+}
+
+
+/* =====================================================
+   MEMORY TIMELINE
+===================================================== */
+
+.timeline-title {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 20px;
+
+    margin-bottom: 10px;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    color: #312e81;
+}
+
+
+.timeline-title small {
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    background: #ede9fe;
+
+    color: #7c3aed;
+}
+
+
+.memory-timeline {
+
+    position: relative;
+
+    padding: 4px 0 4px 2px;
+
+    margin-bottom: 18px;
+}
+
+
+.timeline-item {
+
+    display: flex;
+
+    gap: 10px;
+
+    position: relative;
+
+    padding-bottom: 14px;
+}
+
+
+.timeline-line {
+
+    position: relative;
+
+    width: 15px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+
+.timeline-line::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 10px;
+
+    bottom: -14px;
+
+    width: 2px;
+
+    background: linear-gradient(
+        to bottom,
+        #a78bfa,
+        #ddd6fe
+    );
+}
+
+
+.timeline-item:last-child
+.timeline-line::after {
+
+    display: none;
+}
+
+
+.timeline-dot {
+
+    width: 9px;
+
+    height: 9px;
+
+    margin-top: 3px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #ec4899
+    );
+
+    box-shadow:
+        0 0 0 4px #ede9fe;
+
+    z-index: 2;
+}
+
+
+.timeline-content {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 10px 11px;
+
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.85);
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.035);
+
+    transition: all 0.2s ease;
+}
+
+
+.timeline-content:hover {
+
+    transform: translateX(2px);
+
+    border-color: #c4b5fd;
+
+    box-shadow:
+        0 5px 15px rgba(124, 58, 237, 0.08);
+}
+
+
+.timeline-date {
+
+    margin-bottom: 5px;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    color: #8b5cf6;
+}
+
+
+.timeline-memory {
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    color: #374151;
+
+    word-break: break-word;
+}
+
+
+/* Empty timeline */
+
+.timeline-empty {
+
+    text-align: center;
+
+    padding: 18px 10px;
+
+    border: 1px dashed #ddd6fe;
+
+    border-radius: 12px;
+
+    background: rgba(250, 245, 255, 0.6);
+}
+
+
+.timeline-empty-icon {
+
+    font-size: 24px;
+
+    margin-bottom: 5px;
+}
+
+
+.timeline-empty p {
+
+    margin: 0;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: #6b7280;
+}
+
+
+.timeline-empty small {
+
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 9px;
+
+    line-height: 1.4;
+
+    color: #9ca3af;
+}
+
+
+/* =====================================================
+   RELEVANT MEMORY TITLE
+===================================================== */
+
+.memory-list-title {
+
+    margin-top: 8px;
+
+    margin-bottom: 10px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+
+    color: #6b7280;
+}
+
+
+/* =====================================================
+   WHY THIS RESPONSE
+===================================================== */
+
+.response-why {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin: 10px 0 14px;
+
+    padding: 13px 15px;
+
+    border-radius: 13px;
+
+    background: linear-gradient(
+        135deg,
+        #faf5ff,
+        #fdf2f8
+    );
+
+    border: 1px solid #e9d5ff;
+
+    box-shadow:
+        0 4px 15px rgba(124, 58, 237, 0.07);
+
+    animation: responseAppear 0.35s ease;
+}
+
+
+.response-why.hidden {
+
+    display: none;
+}
+
+
+.why-icon {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 30px;
+
+    height: 30px;
+
+    flex-shrink: 0;
+
+    border-radius: 9px;
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #ec4899
+    );
+
+    font-size: 15px;
+}
+
+
+.response-why strong {
+
+    display: block;
+
+    font-size: 12px;
+
+    color: #581c87;
+}
+
+
+.response-why p {
+
+    margin: 3px 0 8px;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+
+    color: #6b7280;
+}
+
+
+.why-memory-label {
+
+    margin-bottom: 5px;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+
+    color: #8b5cf6;
+}
+
+
+.why-memory-item {
+
+    margin-bottom: 5px;
+
+    padding: 7px 9px;
+
+    border-radius: 7px;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    border-left: 3px solid #a78bfa;
+
+    font-size: 9px;
+
+    line-height: 1.45;
+
+    color: #4b5563;
+}
+
+
+.why-memory-item:last-child {
+
+    margin-bottom: 0;
+}
+
+
+@keyframes responseAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(5px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .response-why {
+
+        margin-left: 5px;
+
+        margin-right: 5px;
+
+    }
+
+    .timeline-content {
+
+        padding: 9px;
+
+    }
+
+    .timeline-memory {
+
+        font-size: 10px;
+
+    }
+
+}
+
+/* =====================================================
+   AI RESPONSE FORMATTING
+===================================================== */
+
+.ai-line {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+
+.list-number {
+    color: #7c3aed;
+    margin-right: 3px;
+}
+
+
+.bullet {
+    color: #7c3aed;
+    font-weight: 800;
+    margin-right: 5px;
+}
+
+
+/* AI TABLE */
+
+.ai-table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    margin: 12px 0;
+
+    border-radius: 10px;
+
+    border: 1px solid #ddd6fe;
+
+    background: white;
+}
+
+
+.ai-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 12px;
+
+    min-width: 500px;
+}
+
+
+.ai-table th {
+
+    padding: 11px;
+
+    text-align: left;
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #8b5cf6
+    );
+
+    color: white;
+
+    font-weight: 700;
+
+    border-bottom: 1px solid #ddd6fe;
+}
+
+
+.ai-table td {
+
+    padding: 10px 11px;
+
+    border-bottom: 1px solid #ede9fe;
+
+    color: #374151;
+
+    line-height: 1.5;
+
+    vertical-align: top;
+}
+
+
+.ai-table tr:last-child td {
+
+    border-bottom: none;
+}
+
+
+.ai-table tbody tr:hover {
+
+    background: #faf5ff;
+}
+/* ========================================
+   CHATGPT STYLE TABLE - BOUNDARY FIX
+======================================== */
+
+.message-content .ai-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin: 14px 0;
+    border: 1.5px solid #c4b5fd;
+    border-radius: 12px;
+    background: #ffffff;
+    box-sizing: border-box;
+}
+
+.message-content table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 0;
+    font-size: 12px;
+}
+
+/* Header */
+
+.message-content th {
+    padding: 11px 12px;
+    text-align: left;
+    background: #f5f3ff;
+    color: #4c1d95;
+    font-weight: 700;
+    border-right: 1px solid #ddd6fe;
+    border-bottom: 1px solid #c4b5fd;
+}
+
+.message-content th:last-child {
+    border-right: none;
+}
+
+/* Table cells */
+
+.message-content td {
+    padding: 10px 12px;
+    color: #374151;
+    line-height: 1.5;
+    vertical-align: top;
+
+    border-right: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.message-content td:last-child {
+    border-right: none;
+}
+
+/* Remove bottom border from last row */
+
+.message-content tr:last-child td {
+    border-bottom: none;
+}
+
+/* Hover */
+
+.message-content tbody tr:hover {
+    background: #faf5ff;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .message-content .ai-table-wrapper {
+        overflow-x: auto;
+    }
+
+    .message-content table {
+        min-width: 500px;
+    }
+}
+
+/* Fix excessive space in customer chat header */
+.chat-header {
+    margin-bottom: 8px !important;
+    padding-bottom: 8px !important;
+}
+
+.chat-header + .chat-box {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.welcome-message {
+    margin-top: 0 !important;
+    padding-top: 10px !important;
+}

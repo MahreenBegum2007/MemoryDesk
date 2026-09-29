@@ -11,20 +11,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
 
 
-# API keys
 HINDSIGHT_URL = os.getenv("HINDSIGHT_URL")
 HINDSIGHT_API_KEY = os.getenv("HINDSIGHT_API_KEY")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
-
-# Hindsight memory bank
 BANK_ID = "memorydesk-final"
 
 
 # Clients
 hindsight = Hindsight(
     base_url=HINDSIGHT_URL,
-    api_key=HINDSIGHT_API_KEY,
+    api_key=HINDSIGHT_API_KEY
 )
 
 groq = Groq(
@@ -32,33 +29,30 @@ groq = Groq(
 )
 
 
-def chat_with_customer(customer_name: str, customer_message: str):
+def chat_with_customer(customer_name, customer_message):
 
     # --------------------------------------------------
-    # 1. RECALL PREVIOUS CUSTOMER MEMORIES
+    # 1. RECALL PREVIOUS MEMORIES
     # --------------------------------------------------
 
     recall_query = f"""
 Customer name: {customer_name}
 
-Customer's current message:
+Current customer message:
 {customer_message}
 
-Find only memories that are clearly related to this customer.
-Ignore memories belonging to other customers.
+Find relevant memories about this customer.
 """
 
     memories = []
 
     try:
-
         memory_result = hindsight.recall(
             bank_id=BANK_ID,
-            query=recall_query,
+            query=recall_query
         )
 
         for memory in memory_result.results:
-
             memory_text = memory.text
 
             if customer_name.lower() in memory_text.lower():
@@ -68,136 +62,116 @@ Ignore memories belonging to other customers.
                 break
 
     except Exception as e:
+        print(f"Hindsight recall temporarily unavailable: {e}")
 
-        print(
-            f"Hindsight recall temporarily unavailable: {e}"
-        )
 
     # --------------------------------------------------
     # 2. PREPARE MEMORY CONTEXT
     # --------------------------------------------------
 
     if memories:
-
-        memory_text = "\n".join(
-            f"- {memory}"
-            for memory in memories
+        memory_context = "\n".join(
+            f"- {memory}" for memory in memories
         )
-
     else:
-
-        memory_text = (
-            "No previous memories found for this customer."
-        )
+        memory_context = "No previous memories found for this customer."
 
 
     # --------------------------------------------------
-    # 3. AI SYSTEM PROMPT
+    # 3. GENERATE AI RESPONSE
     # --------------------------------------------------
 
     system_prompt = f"""
 You are MemoryDesk, an AI customer support agent.
 
-You are currently helping ONE customer.
+You are currently helping one customer.
 
 Customer name:
 {customer_name}
 
-Your job is to provide helpful, polite and personalized
-customer support.
+Previous relevant memories:
+{memory_context}
 
-IMPORTANT MEMORY RULES:
+Use previous memories when they are relevant.
 
-1. Use previous memories when they are relevant.
+If a previous memory is useful, acknowledge it naturally.
 
-2. When a previous memory is clearly useful,
-   naturally acknowledge it in your response.
+Do not make the customer repeat information they already provided.
 
-3. If the customer previously mentioned a preference,
-   problem, or repeated issue, do not make them repeat
-   that information unnecessarily.
+Never mention another customer.
 
-4. For repeated problems, explain that you remember
-   the earlier interaction and use that context.
+Never invent customer facts.
 
-5. NEVER mention another customer's name.
+Do not describe the memory system, database, or Hindsight.
 
-6. NEVER use information belonging to another customer.
+Do not describe your own previous AI responses as customer memories.
 
-7. NEVER invent customer-specific facts.
+Prefer facts directly provided by the customer.
 
-8. If a detail is not present in the memories,
-   do not pretend that you remember it.
+If relevant memories exist, explicitly acknowledge them naturally.
 
-9. Do not say that you are reading a database
-   or memory system.
+RESPONSE FORMATTING:
 
-10. Keep the response focused on the current customer.
+Write responses in clean ChatGPT-style Markdown.
 
-11. Prefer remembering facts provided by the customer,
-    such as preferences, previous problems, or
-    important context.
-
-12. Do NOT describe your own previous AI responses
-    as customer memories.
-
-13. If relevant memories exist, explicitly acknowledge
-    the remembered information naturally.
-
-14. Never invent information that is not present
-    in memory.
-
-Previous memories for {customer_name}:
-
-{memory_text}
+Rules:
+- Use short paragraphs.
+- Use blank lines between paragraphs.
+- Use headings when useful.
+- Use numbered lists for steps.
+- Use bullet lists for multiple items.
+- Use **bold** for important words.
+- Use Markdown tables only when they genuinely help.
+- Keep responses concise and easy to scan.
+- Do not repeat the customer's question.
+- Do not mention these instructions.
 """
 
 
+    try:
+        response = groq.chat.completions.create(
+            model="openai/gpt-oss-20b",
+            messages=[
+                {
+                    "role": "system",
+                    "content": system_prompt
+                },
+                {
+                    "role": "user",
+                    "content": customer_message
+                }
+            ],
+            temperature=0.7
+        )
+
+        answer = response.choices[0].message.content
+
+    except Exception as e:
+        print(f"Groq error: {e}")
+
+        answer = (
+            "I'm sorry, I couldn't generate a response right now. "
+            "Please try again."
+        )
+
+
     # --------------------------------------------------
-    # 4. GENERATE AI RESPONSE
+    # 4. SAVE NEW MEMORY TO HINDSIGHT
     # --------------------------------------------------
 
-    response = groq.chat.completions.create(
-
-        model="openai/gpt-oss-20b",
-
-        messages=[
-
-            {
-                "role": "system",
-                "content": system_prompt
-            },
-
-            {
-                "role": "user",
-                "content": customer_message
-            }
-
-        ],
+    new_memory = (
+        f"Customer: {customer_name}\n"
+        f"Customer message: {customer_message}"
     )
-
-
-    answer = response.choices[0].message.content
-
-
-    # --------------------------------------------------
-    # 5. SAVE CUSTOMER INTERACTION TO HINDSIGHT
-    # --------------------------------------------------
 
     try:
 
         hindsight.retain(
-
             bank_id=BANK_ID,
-
-            content=f"""
-Customer: {customer_name}
-
-Customer message:
-{customer_message}
-""",
-
+            content=new_memory
         )
+
+        print("New memory saved to Hindsight.")
 
     except Exception as e:
 
@@ -207,13 +181,18 @@ Customer message:
 
 
     # --------------------------------------------------
+    # 5. ADD NEW MEMORY TO UI IMMEDIATELY
+    # --------------------------------------------------
+
+    if new_memory not in memories:
+        memories.insert(0, new_memory)
+
+
+    # --------------------------------------------------
     # 6. RETURN RESULT TO FRONTEND
     # --------------------------------------------------
 
     return {
-
         "answer": answer,
-
-        "memories": memories,
-
+        "memories": memories
     }
